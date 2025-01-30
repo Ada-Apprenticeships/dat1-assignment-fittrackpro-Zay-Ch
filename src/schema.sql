@@ -20,7 +20,7 @@ DROP TABLE IF EXISTS equipment_maintenance_log;
 
 -- 1. Locations Table
 CREATE TABLE locations (
-    location_id SERIAL PRIMARY KEY,
+    location_id INTEGER PRIMARY KEY,
     name VARCHAR(100) NOT NULL CHECK (LENGTH(name) <= 100),
     address TEXT NOT NULL,
     phone_number VARCHAR(20) CHECK (LENGTH(phone_number) <= 20),
@@ -30,7 +30,7 @@ CREATE TABLE locations (
 
 -- 2. Members Table
 CREATE TABLE members (
-    member_id SERIAL PRIMARY KEY,
+    member_id INTEGER PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL CHECK (LENGTH(first_name) <= 50),
     last_name VARCHAR(50) NOT NULL CHECK (LENGTH(last_name) <= 50),
     email VARCHAR(100) UNIQUE NOT NULL CHECK (LENGTH(email) <= 100),
@@ -43,7 +43,7 @@ CREATE TABLE members (
 
 -- 3. Staff Table
 CREATE TABLE staff (
-    staff_id SERIAL PRIMARY KEY,
+    staff_id INTEGER PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL CHECK (LENGTH(first_name) <= 50),
     last_name VARCHAR(50) NOT NULL CHECK (LENGTH(last_name) <= 50),
     email VARCHAR(100) UNIQUE NOT NULL CHECK (LENGTH(email) <= 100),
@@ -56,7 +56,7 @@ CREATE TABLE staff (
 
 -- 4. Equipment Table
 CREATE TABLE equipment (
-    equipment_id SERIAL PRIMARY KEY,
+    equipment_id INTEGER PRIMARY KEY,
     name VARCHAR(100) NOT NULL CHECK (LENGTH(name) <= 100),
     type VARCHAR(50) CHECK (type IN ('Cardio', 'Strength') AND LENGTH(type) <= 50),
     purchase_date DATE,
@@ -67,7 +67,7 @@ CREATE TABLE equipment (
 
 -- 5. Classes Table
 CREATE TABLE classes (
-    class_id SERIAL PRIMARY KEY,
+    class_id INTEGER PRIMARY KEY,
     name VARCHAR(100) NOT NULL CHECK (LENGTH(name) <= 100),
     description TEXT,
     capacity INT NOT NULL,
@@ -77,7 +77,7 @@ CREATE TABLE classes (
 
 -- 6. Class Schedule Table
 CREATE TABLE class_schedule (
-    schedule_id SERIAL PRIMARY KEY,
+    schedule_id INTEGER PRIMARY KEY,
     class_id INT REFERENCES classes(class_id),
     staff_id INT REFERENCES staff(staff_id),
     start_time TIMESTAMP NOT NULL,
@@ -86,7 +86,7 @@ CREATE TABLE class_schedule (
 
 -- 7. Memberships Table
 CREATE TABLE memberships (
-    membership_id SERIAL PRIMARY KEY,
+    membership_id INTEGER PRIMARY KEY,
     member_id INT REFERENCES members(member_id),
     type VARCHAR(50) NOT NULL CHECK (LENGTH(type) <= 50),
     start_date DATE DEFAULT CURRENT_DATE,
@@ -96,7 +96,7 @@ CREATE TABLE memberships (
 
 -- 8. Attendance Table
 CREATE TABLE attendance (
-    attendance_id SERIAL PRIMARY KEY,
+    attendance_id INTEGER PRIMARY KEY,
     member_id INT REFERENCES members(member_id),
     location_id INT REFERENCES locations(location_id),
     check_in_time TIMESTAMP NOT NULL,
@@ -105,7 +105,7 @@ CREATE TABLE attendance (
 
 -- 9. Class Attendance Table
 CREATE TABLE class_attendance (
-    class_attendance_id SERIAL PRIMARY KEY,
+    class_attendance_id INTEGER PRIMARY KEY,
     schedule_id INT REFERENCES class_schedule(schedule_id),
     member_id INT REFERENCES members(member_id),
     attendance_status VARCHAR(20) CHECK (attendance_status IN ('Registered', 'Attended', 'Unattended') AND LENGTH(attendance_status) <= 20)
@@ -113,7 +113,7 @@ CREATE TABLE class_attendance (
 
 -- 10. Payments Table
 CREATE TABLE payments (
-    payment_id SERIAL PRIMARY KEY,
+    payment_id INTEGER PRIMARY KEY,
     member_id INT REFERENCES members(member_id),
     amount DECIMAL(10,2) NOT NULL,
     payment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -123,7 +123,7 @@ CREATE TABLE payments (
 
 -- 11. Personal Training Sessions Table
 CREATE TABLE personal_training_sessions (
-    session_id SERIAL PRIMARY KEY,
+    session_id INTEGER PRIMARY KEY,
     member_id INT REFERENCES members(member_id),
     staff_id INT REFERENCES staff(staff_id),
     session_date DATE NOT NULL,
@@ -134,7 +134,7 @@ CREATE TABLE personal_training_sessions (
 
 -- 12. Member Health Metrics Table
 CREATE TABLE member_health_metrics (
-    metric_id SERIAL PRIMARY KEY,
+    metric_id INTEGER PRIMARY KEY,
     member_id INT REFERENCES members(member_id),
     measurement_date DATE NOT NULL,
     weight DECIMAL(5,2),
@@ -145,7 +145,7 @@ CREATE TABLE member_health_metrics (
 
 -- 13. Equipment Maintenance Log Table
 CREATE TABLE equipment_maintenance_log (
-    log_id SERIAL PRIMARY KEY,
+    log_id INTEGER PRIMARY KEY,
     equipment_id INT REFERENCES equipment(equipment_id),
     maintenance_date DATE NOT NULL,
     description TEXT,
