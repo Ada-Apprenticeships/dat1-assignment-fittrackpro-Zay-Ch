@@ -3,6 +3,8 @@
 .mode column
 
 -- Enable foreign key support
+PRAGMA foreign_keys = ON;
+
 
 -- Staff Management Queries
 
