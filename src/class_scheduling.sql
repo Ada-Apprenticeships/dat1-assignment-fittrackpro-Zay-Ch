@@ -51,8 +51,8 @@ WHERE schedule_id = 7 AND member_id = 2;
 -- Removes a member from the scheduled class (schedule_id 7).
 
 
--- 5. List top 5 most popular classes
--- TODO: Write a query to list top 5 most popular classes
+-- 5. List top 3 most popular classes
+-- TODO: Write a query to list top 3 most popular classes
 
 SELECT c.class_id, c.name AS class_name, COUNT(ca.class_attendance_id) AS registration_count
 FROM classes c
