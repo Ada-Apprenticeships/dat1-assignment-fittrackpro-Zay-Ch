@@ -32,3 +32,11 @@ GROUP BY mem.type;
 
 -- 3. Identify members with expiring memberships this year
 -- TODO: Write a query to identify members with expiring memberships this year
+
+SELECT m.member_id, m.first_name, m.last_name, m.email, mem.end_date
+FROM memberships mem
+JOIN members m ON mem.member_id = m.member_id
+WHERE mem.end_date BETWEEN CURRENT_DATE AND DATE(CURRENT_DATE, '+1 year');
+
+-- Finds memberships expiring within the next 12 months.
+
