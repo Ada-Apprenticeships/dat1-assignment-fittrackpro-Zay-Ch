@@ -12,7 +12,9 @@ PRAGMA foreign_keys = ON;
 
 SELECT equipment_id, name, next_maintenance_date
 FROM equipment
-WHERE next_maintenance_date BETWEEN CURRENT_DATE AND DATE('now', '+30 days');
+WHERE next_maintenance_date BETWEEN CURRENT_DATE AND DATE(CURRENT_DATE, '+30 days');
+
+-- Uses BETWEEN to filter next_maintenance_date.
 
 
 -- 2. Count equipment types in stock

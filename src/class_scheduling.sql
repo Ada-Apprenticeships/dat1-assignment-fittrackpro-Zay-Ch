@@ -9,12 +9,22 @@ PRAGMA foreign_keys = ON;
 
 -- 1. List all classes with their instructors
 -- TODO: Write a query to list all classes with their instructors
+SELECT class_id, name, instructor_name
+FROM classes;
+
 
 -- 2. Find available classes for a specific date
 -- TODO: Write a query to find available classes for a specific date
+SELECT class_id, name, start_time, end_time, capacity
+FROM classes
+WHERE start_date = '2025-02-01';
+
 
 -- 3. Register a member for a class
 -- TODO: Write a query to register a member for a class
+INSERT INTO class_attendance (member_id, class_id, attendance_date)
+VALUES (20, 3, '2025-02-01');
+
 
 -- 4. Cancel a class registration
 -- TODO: Write a query to cancel a class registration
