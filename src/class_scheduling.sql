@@ -10,12 +10,13 @@ PRAGMA foreign_keys = ON;
 -- 1. List all classes with their instructors
 -- TODO: Write a query to list all classes with their instructors
 
-SELECT c.class_id, c.name AS class_name, CONCAT(s.first_name, ' ', s.last_name) AS instructor_name
+SELECT DISTINCT c.class_id, c.name AS class_name, CONCAT(s.first_name, ' ', s.last_name) AS instructor_name
 FROM classes c
 JOIN class_schedule cs ON c.class_id = cs.class_id
 JOIN staff s ON cs.staff_id = s.staff_id;
 
 -- Joins classes, class_schedule, and staff to get class names and instructor names.
+-- Removes duplicates
 
 
 -- 2. Find available classes for a specific date
