@@ -70,7 +70,7 @@ LIMIT 3;
 -- 6. Calculate average number of classes per member
 -- TODO: Write a query to calculate average number of classes per member
 
-SELECT AVG(class_count) AS avg_classes_per_member
+SELECT ROUND(AVG(class_count), 2) AS avg_classes_per_member
 FROM (
     SELECT member_id, COUNT(*) AS class_count
     FROM class_attendance
@@ -79,4 +79,5 @@ FROM (
 
 -- Calculates how many classes each member attended.
 -- Averages that count across all members.
+-- Rounds to 2 decimal places
 
