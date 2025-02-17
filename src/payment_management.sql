@@ -22,7 +22,7 @@ SELECT
     SUM(amount) AS total_revenue
 FROM payments
 WHERE payment_type = 'Monthly membership fee'
-AND payment_date >= date('now', '-12 months')
+AND payment_date LIKE '%2024%'
 GROUP BY month
 ORDER BY month;
 

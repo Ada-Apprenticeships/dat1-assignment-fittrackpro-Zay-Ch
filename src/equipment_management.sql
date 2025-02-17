@@ -20,7 +20,7 @@ WHERE next_maintenance_date BETWEEN CURRENT_DATE AND DATE(CURRENT_DATE, '+30 day
 -- 2. Count equipment types in stock
 -- TODO: Write a query to count equipment types in stock
 
-SELECT type, COUNT(*) AS count
+SELECT type as equipment_type, COUNT(*) AS count
 FROM equipment
 GROUP BY type;
 
@@ -28,7 +28,7 @@ GROUP BY type;
 -- 3. Calculate average age of equipment by type (in days)
 -- TODO: Write a query to calculate average age of equipment by type (in days)
 
-SELECT type, AVG(JULIANDAY(CURRENT_DATE) - JULIANDAY(purchase_date)) AS avg_age_days
+SELECT type as equipment_type, AVG(JULIANDAY(CURRENT_DATE) - JULIANDAY(purchase_date)) AS avg_age_days
 FROM equipment
 GROUP BY type;
 

@@ -36,6 +36,7 @@ SELECT COUNT(*) AS total_members FROM members;
 -- 4. Find member with the most class registrations
 -- TODO: Write a query to find the member with the most class registrations
 
+
 SELECT m.member_id, m.first_name, m.last_name, COUNT(ca.class_attendance_id) AS registration_count 
 FROM members m
 JOIN class_attendance ca ON m.member_id = ca.member_id
@@ -58,6 +59,18 @@ GROUP BY m.member_id, m.first_name, m.last_name
 ORDER BY registration_count ASC
 LIMIT 1;
 
+SELECT 
+    cl.member_id,
+    first_name, 
+    last_name, 
+    COUNT(cl.member_id) AS registration_count
+FROM class_attendance cl 
+LEFT JOIN members me
+ON cl.member_id = me.member_id
+GROUP BY me.member_id
+ORDER BY registration_count ASC
+LIMIT 1;
+
 -- Similar to 1.4, but orders by registration_count ASC to find the least registered member.
 -- Uses LEFT JOIN to include members with zero registrations.
 
@@ -65,10 +78,13 @@ LIMIT 1;
 -- TODO: Write a query to calculate the percentage of members who have attended at least one class
 
 SELECT 
-    ROUND((COUNT(DISTINCT ca.member_id) * 100.0 / COUNT(DISTINCT m.member_id)), 2) AS percentage_attended
-FROM members m
-LEFT JOIN class_attendance ca ON m.member_id = ca.member_id 
-AND ca.attendance_status = 'Attended';
-
--- Counts distinct members who have attended at least one class.
--- Divides by the total number of members and multiplies by 100 to get the percentage and rounds to 2 decimal places.
+    -- DISTINCT so that the memmber_id is not duplicated
+    (COUNT(DISTINCT member_id) * 100) / ( SELECT COUNT(*) FROM members ) AS percentage_of_members_who_attended_at_least_one_class
+FROM (
+    SELECT 
+        member_id,
+        COUNT(member_id) AS registration_count
+    FROM class_attendance
+    GROUP BY member_id
+    HAVING registration_count >= 1
+);
