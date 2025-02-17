@@ -55,7 +55,7 @@ SELECT m.member_id, m.first_name, m.last_name, COUNT(ca.class_attendance_id) AS 
 FROM members m
 LEFT JOIN class_attendance ca ON m.member_id = ca.member_id
 GROUP BY m.member_id, m.first_name, m.last_name
-ORDER BY registration_count ASC;
+ORDER BY registration_count ASC
 LIMIT 1;
 
 -- Similar to 1.4, but orders by registration_count ASC to find the least registered member.
