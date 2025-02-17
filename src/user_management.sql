@@ -5,7 +5,6 @@
 -- Enable foreign key support
 PRAGMA foreign_keys = ON;
 
-
 -- User Management Queries
 
 -- 1. Retrieve all members
@@ -22,7 +21,7 @@ UPDATE members
 SET phone_number = '555-9876', email = 'emily.jones.updated@email.com' 
 WHERE member_id = 5;
 
--- My own testing
+-- My own testing to see if the above 1.2 updates the correct member id in the members table with the desired data.
 SELECT phone_number, email
 FROM members
 WHERE member_id = 5;
@@ -56,8 +55,8 @@ SELECT m.member_id, m.first_name, m.last_name, COUNT(ca.class_attendance_id) AS 
 FROM members m
 LEFT JOIN class_attendance ca ON m.member_id = ca.member_id
 GROUP BY m.member_id, m.first_name, m.last_name
-ORDER BY registration_count ASC
-LIMIT 1;
+ORDER BY registration_count ASC;
+--LIMIT 1;
 
 -- Similar to 1.4, but orders by registration_count ASC to find the least registered member.
 -- Uses LEFT JOIN to include members with zero registrations.
