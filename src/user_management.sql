@@ -59,20 +59,11 @@ GROUP BY m.member_id, m.first_name, m.last_name
 ORDER BY registration_count ASC
 LIMIT 1;
 
-SELECT 
-    cl.member_id,
-    first_name, 
-    last_name, 
-    COUNT(cl.member_id) AS registration_count
-FROM class_attendance cl 
-LEFT JOIN members me
-ON cl.member_id = me.member_id
-GROUP BY me.member_id
-ORDER BY registration_count ASC
-LIMIT 1;
 
 -- Similar to 1.4, but orders by registration_count ASC to find the least registered member.
 -- Uses LEFT JOIN to include members with zero registrations.
+-- Denotion: I interpreted least registration count to include 0
+
 
 -- 6. Calculate the percentage of members who have attended at least one class
 -- TODO: Write a query to calculate the percentage of members who have attended at least one class
