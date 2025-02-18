@@ -38,9 +38,9 @@ GROUP BY c.class_id, c.name, cs.start_time, cs.end_time, c.capacity;
 -- TODO: Write a query to register a member for a class
 
 INSERT INTO class_attendance (schedule_id, member_id, attendance_status)
-VALUES (3, 11, 'Registered');
+VALUES (7, 11, 'Registered');
 
--- Registers member_id = 11 for class_id = 3.
+-- Registers member_id = 11 for schedule_id = 7 because the task specifies the date 2025-02-01, hence 7
 
 
 -- 4. Cancel a class registration
